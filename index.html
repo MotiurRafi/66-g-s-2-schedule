@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Section G Schedule</title>
     <style>
         :root {
-            --primary: #3498db;
-            --secondary: #2c3e50;
-            --accent: #f39c12;
-            --light: #ecf0f1;
-            --white: #ffffff;
-            --gray: #bdc3c7;
-            --hover: #eaf7ff;
+            --primary: #4A90E2;
+            --secondary: #2C3E50;
+            --accent: #F39C12;
+            --light: #F5F7FA;
+            --white: #FFFFFF;
+            --gray: #BDC3C7;
+            --hover: #EAF7FF;
+            --course-bg: #D6EAF8;
+            --course-text: #21618C;
         }
 
         * {
@@ -23,9 +26,13 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            background-color: var(--light);
             padding: 15px;
-            line-height: 1.6;
+            line-height: 1.5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
@@ -36,225 +43,441 @@
         h1 {
             text-align: center;
             color: var(--secondary);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
             font-weight: 600;
         }
 
+        /* Table styling */
         .schedule-table {
             width: 100%;
             border-collapse: collapse;
             background-color: var(--white);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
             overflow: hidden;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .schedule-table th {
             background-color: var(--primary);
             color: var(--white);
-            padding: 10px 8px;
+            padding: 12px;
             text-align: center;
             font-weight: 600;
-            border: 1px solid rgba(255,255,255,0.2);
             white-space: nowrap;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .schedule-table td {
-            padding: 10px 8px;
+            padding: 12px;
             text-align: center;
             border: 1px solid #ddd;
             vertical-align: top;
             min-height: 50px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             word-wrap: break-word;
-            background-color: var(--white);
         }
 
         .schedule-table tr:nth-child(even) td:not(.break-cell) {
-            background-color: var(--light);
+            background-color: #f9fbfd;
         }
 
         .schedule-table tr:hover td {
             background-color: var(--hover);
         }
 
+        /* Time slots */
         .time-slot {
             font-weight: bold;
-            color: var(--secondary);
-            background-color: var(--light);
+            color: white;
             padding: 4px 6px;
-            border-radius: 4px;
+            border-radius: 5px;
             display: inline-block;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             margin-bottom: 4px;
         }
 
+        /* Course codes */
         .course-code {
             display: inline-block;
-            background-color: #e8f4fc;
-            padding: 2px 6px;
-            border-radius: 4px;
+            background-color: var(--course-bg);
+            padding: 4px 8px;
+            border-radius: 5px;
             margin: 2px;
             font-size: 0.85rem;
             font-weight: 600;
-            color: #2980b9;
+            color: var(--course-text);
             white-space: nowrap;
         }
 
+        /* Break cell */
         .break-cell {
             background-color: var(--accent);
             color: white;
             font-weight: bold;
             text-align: center;
             vertical-align: middle;
+            font-size: 0.9rem;
         }
 
+        /* Instructor row */
         .instructor-row td {
             background-color: #f0f0f0;
             font-weight: bold;
             color: var(--secondary);
-            padding: 8px;
+            padding: 10px;
             font-size: 0.9rem;
         }
 
+        /* Instructor name */
         .instructor-name {
-            color: #27ae60;
+            color: #27AE60;
             font-weight: 600;
         }
+        .dt{
+            color: black !important;
+            background-color: white !important;
+        }
+        /* Responsiveness */
+        @media (max-width: 1320px) {
 
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .schedule-table {
-                font-size: 0.8rem;
-            }
-
-            .time-slot {
-                font-size: 0.75rem;
-                padding: 2px 4px;
-            }
-
+            .schedule-table,
+            .time-slot,
             .course-code {
-                font-size: 0.75rem;
-                padding: 2px 4px;
+                font-size: 0.7rem;
             }
 
-            th, td {
+            .schedule-table th,
+            .schedule-table td {
+                padding: 12px 8px;
+            }
+        }
+
+        @media (max-width: 1170px) {
+
+            .schedule-table,
+            .time-slot,
+            .course-code {
+                font-size: 0.6rem;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
                 padding: 8px 4px;
-                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 1040px) {
+
+            .schedule-table,
+            .time-slot,
+            .course-code {
+                font-size: 0.55rem;
             }
 
+            .schedule-table th,
+            .schedule-table td {
+                padding: 8px 4px;
+            }
+
+            .schedule-table td[data-label="Day / Time"] strong {
+                display: none;
+            }
+
+            .schedule-table td[data-label="Day / Time"]::after {
+                content: attr(data-short);
+                display: inline-block;
+                font-weight: bold;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 855px) {
+
+            .schedule-table,
+            .time-slot,
+            .course-code {
+                font-size: 0.55rem;
+                padding: 2px 3px;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
+                font-size: .55rem;
+            }
+
+            .schedule-table td[data-label="Day / Time"]::after {
+                font-size: .55rem;
+                margin-top: 4px;
+            }
+
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .schedule-table,
+            .time-slot,
+            .course-code {
+                font-size: 0.55rem;
+                padding: 2px 3px;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
+                font-size: .55rem;
+                padding: 8px 0;
+            }
+
+            .schedule-table td[data-label="Day / Time"]::after {
+                font-size: .55rem;
+                margin-top: 4px;
+            }
+        }
+
+        @media (max-width: 688px) {
             h1 {
                 font-size: 1.2rem;
             }
-        }
 
-        @media (max-width: 480px) {
-            .schedule-table {
-                font-size: 0.75rem;
-            }
-
-            th, td {
-                padding: 6px 2px;
-                font-size: 0.7rem;
-            }
-
-            .time-slot {
-                font-size: 0.7rem;
-            }
-
+            .schedule-table,
+            .time-slot,
             .course-code {
-                font-size: 0.7rem;
-                padding: 1px 3px;
+                font-size: 0.55rem;
+                padding: 2px 3px;
             }
 
-            h1 {
-                font-size: 1rem;
+            .schedule-table th,
+            .schedule-table td {
+                font-size: .55rem;
+                padding: 8px 4px;
+            }
+
+            .schedule-table td[data-label="Day / Time"]::after {
+                font-size: .55rem;
+                margin-top: 4px;
+            }
+
+            .course-code,
+            .time-slot {
+                display: flex;
+                flex-direction: column;
             }
         }
 
-        /* For very small screens, make table scrollable horizontally */
-        .table-wrapper {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+        @media (max-width: 440px) {
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            .schedule-table td[data-label="Day / Time"]::after {
+                font-size: .55rem;
+                margin-top: 4px;
+            }
+
+            .course-code,
+            .time-slot ,
+            .dt{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        @media (max-width: 404px) {
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            .schedule-table,
+            .time-slot,
+            .course-code {
+                font-size: 0.55rem;
+                padding: 2px 3px;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
+                font-size: .55rem;
+                padding: 8px 4px;
+            }
+
+            .schedule-table td[data-label="Day / Time"]::after {
+                font-size: .55rem;
+                margin-top: 4px;
+            }
+
+            .course-code,
+            .time-slot ,
+            .dt{
+                display: flex;
+                flex-direction: column;
+            }
+            .course-code,
+            .time-slot{
+                margin: 0;
+                font-size: .5rem;
+            }
+            body{
+                padding: .3rem;
+            }
+        }
+        @media (max-width: 356px) {
+
+
+            .schedule-table,
+            .time-slot,
+            .course-code {
+                font-size: 0.55rem;
+                padding: 2px 3px;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
+                font-size: .55rem;
+                padding: 8px 2px;
+            }
+
+            .schedule-table td[data-label="Day / Time"]::after {
+                font-size: .55rem;
+                margin-top: 4px;
+            }
+
+            .course-code,
+            .time-slot ,
+            .dt{
+                display: flex;
+                flex-direction: column;
+            }
+            .course-code,
+            .time-slot{
+                margin: 0;
+                font-size: .45rem;
+                padding: 2px 1px ;
+            }
+            body{
+                padding: .3rem;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>SECTION - G Schedule</h1>
+        <h1>SECTION G Schedule</h1>
 
-        <div class="table-wrapper">
-            <table class="schedule-table">
-                <thead>
-                    <tr>
-                        <th>Day / Time</th>
-                        <th><span class="time-slot">08:50 - 10:05 AM</span></th>
-                        <th><span class="time-slot">10:05 - 11:20 AM</span></th>
-                        <th><span class="time-slot">11:20 AM - 12:35 PM</span></th>
-                        <th>BREAK</th>
-                        <th><span class="time-slot">1:10 - 2:25 PM</span></th>
-                        <th><span class="time-slot">2:25 - 3:40 PM</span></th>
-                        <th><span class="time-slot">3:40 - 4:55 PM</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>SATURDAY</strong></td>
-                        <td><span class="course-code">CHE-1161 TIC RKB-103</span></td>
-                        <td></td>
-                        <td><span class="course-code">MAT-1251 MKH RKB-103</span></td>
-                        <td class="break-cell">BREAK</td>
-                        <td><span class="course-code">CSE-1211 SPJ RAB-304</span></td>
-                        <td><span class="course-code">CSE-1212 SPJ ACL-2</span></td>
-                        <td><span class="course-code">GED-1231 NT-I RAB-306</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>TUESDAY</strong></td>
-                        <td><span class="course-code">MAT-1251 MKH RAB-309</span></td>
-                        <td><span class="course-code">CSE-1211 SPJ RAB-401</span></td>
-                        <td><span class="course-code">CSE-1212 SPJ ACL-4</span></td>
-                        <td class="break-cell">BREAK</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><strong>WEDNESDAY</strong></td>
-                        <td><span class="course-code">GED-1231 NT-I RKB-402</span></td>
-                        <td><span class="course-code">CHE-1161 TIC ***</span></td>
-                        <td></td>
-                        <td class="break-cell">BREAK</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th class="dt"><span class="d">Day /</span> <span class="t">Time</span></th>
+                    <th>
+                        <span class="time-slot">
+                            <span class="s-time">08:50 -</span>
+                            <span class="e-time">10:05 AM</span>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="time-slot">
+                            <span class="s-time">10:05 -</span>
+                            <span class="e-time">11:20 AM</span>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="time-slot">
+                            <span class="s-time">11:20 -</span>
+                            <span class="e-time">12:35 PM</span>
+                        </span>
+                    </th>
+                    <th>BRK</th>
+                    <th>
+                        <span class="time-slot">
+                            <span class="s-time">1:10 -</span>
+                            <span class="e-time">2:25 PM</span>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="time-slot">
+                            <span class="s-time">2:25 -</span>
+                            <span class="e-time">3:40 PM</span>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="time-slot">
+                            <span class="s-time">3:40 -</span>
+                            <span class="e-time">4:55 PM</span>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
 
-                    <!-- Instructor Information Section -->
-                    <tr class="instructor-row">
-                        <td colspan="8" style="text-align: left; padding: 12px; font-size: 0.95rem;">Instructor Information:</td>
-                    </tr>
-                    <tr>
-                        <td><strong>TIC</strong></td>
-                        <td colspan="7"></td>
-                    </tr>
-                    <tr>
-                        <td><strong>MKH</strong></td>
-                        <td colspan="7"></td>
-                    </tr>
-                    <tr>
-                        <td><strong>SPJ</strong></td>
-                        <td colspan="7"><span class="instructor-name">Soumik Paul Jisun</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>NT-I</strong></td>
-                        <td colspan="7"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <tbody>
+                <tr>
+                    <td data-label="Day / Time" data-short="SAT"><strong>SATURDAY</strong></td>
+                    <td data-label="08:50 - 10:05 AM">
+                        <span class="course-code"><span class="course-id">CHE-1161</span> <span
+                                class="instructor">TIC</span> <span class="room">RKB-103</span></span>
+                    </td>
+                    <td data-label="10:05 - 11:20 AM"></td>
+                    <td data-label="11:20 AM - 12:35 PM">
+                        <span class="course-code"><span class="course-id">MAT-1251</span> <span
+                                class="instructor">MKH</span> <span class="room">RKB-103</span></span>
+                    </td>
+                    <td class="break-cell" data-label="BREAK">B</td>
+                    <td data-label="1:10 - 2:25 PM">
+                        <span class="course-code"><span class="course-id">CSE-1211</span> <span
+                                class="instructor">SPJ</span> <span class="room">RAB-304</span></span>
+                    </td>
+                    <td data-label="2:25 - 3:40 PM">
+                        <span class="course-code"><span class="course-id">CSE-1212</span> <span
+                                class="instructor">SPJ</span> <span class="room">ACL-2</span></span>
+                    </td>
+                    <td data-label="3:40 - 4:55 PM">
+                        <span class="course-code"><span class="course-id">GED-1231</span> <span
+                                class="instructor">NT-I</span> <span class="room">RAB-306</span></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td data-label="Day / Time" data-short="TUE"><strong>TUESDAY</strong></td>
+                    <td data-label="08:50 - 10:05 AM">
+                        <span class="course-code"><span class="course-id">MAT-1251</span> <span
+                                class="instructor">MKH</span> <span class="room">RAB-309</span></span>
+                    </td>
+                    <td data-label="10:05 - 11:20 AM">
+                        <span class="course-code"><span class="course-id">CSE-1211</span> <span
+                                class="instructor">SPJ</span> <span class="room">RAB-401</span></span>
+                    </td>
+                    <td data-label="11:20 AM - 12:35 PM">
+                        <span class="course-code"><span class="course-id">CSE-1212</span> <span
+                                class="instructor">SPJ</span> <span class="room">ACL-4</span></span>
+                    </td>
+                    <td class="break-cell" data-label="BREAK">R</td>
+                    <td data-label="1:10 - 2:25 PM"></td>
+                    <td data-label="2:25 - 3:40 PM"></td>
+                    <td data-label="3:40 - 4:55 PM"></td>
+                </tr>
+
+                <tr>
+                    <td data-label="Day / Time" data-short="WED"><strong>WEDNESDAY</strong></td>
+                    <td data-label="08:50 - 10:05 AM">
+                        <span class="course-code"><span class="course-id">GED-1231</span> <span
+                                class="instructor">NT-I</span> <span class="room">RKB-402</span></span>
+                    </td>
+                    <td data-label="10:05 - 11:20 AM">
+                        <span class="course-code"><span class="course-id">CHE-1161</span> <span
+                                class="instructor">TIC</span> <span class="room">***</span></span>
+                    </td>
+                    <td data-label="11:20 AM - 12:35 PM"></td>
+                    <td class="break-cell" data-label="BREAK">K</td>
+                    <td data-label="1:10 - 2:25 PM"></td>
+                    <td data-label="2:25 - 3:40 PM"></td>
+                    <td data-label="3:40 - 4:55 PM"></td>
+                </tr>
+
+            </tbody>
+        </table>
     </div>
 </body>
+
 </html>
